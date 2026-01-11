@@ -21,6 +21,10 @@ atau
 Beneficiary: Orchard Rd Presbyterian Church
 Bank: UOB/7375/001
 Account No: 450-312-124-1
+atau
+3) Paynow:
+Recipient: Orchard Rd Presbyterian Church
+UEN No : S90CC0750J
 Mohon menuliskan di bagian "Comments": Mission Indo [Kode Janji Iman]". Contoh: "Mission Indo N44"
 
 Apabila sdr/i ada pertanyakan, silakan balas pesan ini atau hubungi sekretariat Tim Misi di 83188474 atau gpo.misi@gmail.com.
@@ -30,4 +34,7 @@ Terima kasih dan Tuhan Yesus memberkati.
 Sola Deo Gloria,
 
 
-Sekretariat Tim Misi """
+Sekretariat Tim Misi 
+
+
+P.S - Pesan lewat SMS akan terikirim sebagai Likely-SCAM, hal ini karena tingginya biaya untuk mendaftar nomor pengirim ke IMDA."""

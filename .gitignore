@@ -1,4 +1,6 @@
 # Ignore local data files
 data/
-#ignore credential files
-hist/credentials.py
+# Ignore credential files
+credentials.py
+# Ignore environment files
+.env
