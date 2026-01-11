@@ -4,3 +4,5 @@ data/
 credentials.py
 # Ignore environment files
 .env
+
+log/
