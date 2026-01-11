@@ -6,9 +6,9 @@ import smtplib
 import ssl
 
 port = 465  # For SSL
-password = "************"
+password = "esmnmagrqekkmwgk"
 context = ssl.create_default_context()
-sender_email = "**********@gmail.com"
+sender_email = "rofansmanao@gmail.com"
 msgsubjecttemplate="""\
 Subject: Komitmen Janji Iman 2023 ({}, {})
 
@@ -26,15 +26,15 @@ Terima kasih telah mengambil bagian dalam Janji Iman 2023 sebagai berikut:
 
 Nomor amplop / Kode Janji Iman anda adalah {}.
 
-Dana janji iman dapat disalurkan melalui: 
-1) Kotak persembahan di gereja, dengan menuliskan "Janji Iman, [Kode Janji Iman]". Contoh: "Janji Iman, {}"
+Dana janji iman dapat disalurkan melalui:
+1) Kotak persembahan di gereja, dengan menuliskan "Janji Iman, [Kode Janji Iman]". Contoh: "Janji Iman, N44"
 atau
-2) Interbank/ATM Transfer: 
+2) Interbank/ATM Transfer:
 Beneficiary: Orchard Rd Presbyterian Church
-Bank: ***/****/***
-Account No: ***-***-***-*
-Mohon menuliskan di bagian "Comments": Mission Indo [Nama] atau [Kode Janji Iman]". Contoh: "Mission Indo {} {}"
-Setelah transfer, mohon info Nama Lengkap & Kode Janji Iman kepada Dkn. ****** ********** (*******).
+Bank: UOB/7375/001
+Account No: 450-312-124-1
+Mohon menuliskan di bagian "Comments": Mission Indo [Nama] atau [Kode Janji Iman]". Contoh: "Mission Indo Adi N44"
+Setelah transfer, mohon info Nama Lengkap & Kode Janji Iman kepada Dkn. Martin Hutagalung (91084529).
 
 Terima kasih dan Tuhan Yesus memberkati.
 
@@ -43,7 +43,7 @@ Salam,
 
 Sekretariat Tim Misi """
 
-filename = '********.csv'
+filename = 'daftarkirimtest.csv'
 
 with open(filename, 'r') as csvfile:
     datareader = csv.reader(csvfile, delimiter=',')
@@ -52,7 +52,7 @@ with open(filename, 'r') as csvfile:
         # send Email
         msgsubject = msgsubjecttemplate.format(row[1], row[6])
         with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-            server.login("**********@gmail.com",password)
+            server.login("rofansmanao@gmail.com",password)
             server.sendmail(sender_email, row[-2], msgsubject+msgbody)
         # send SMS
         msgsender = 'TimMisiGPO'
