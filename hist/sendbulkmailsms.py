@@ -6,9 +6,9 @@ import smtplib
 import ssl
 
 port = 465  # For SSL
-password = "esmnmagrqekkmwgk"
+password = "xxxxxxxxxxxx"
 context = ssl.create_default_context()
-sender_email = "rofansmanao@gmail.com"
+sender_email = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 msgsubjecttemplate="""\
 Subject: Komitmen Janji Iman 2023 ({}, {})
 
@@ -52,7 +52,7 @@ with open(filename, 'r') as csvfile:
         # send Email
         msgsubject = msgsubjecttemplate.format(row[1], row[6])
         with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
-            server.login("rofansmanao@gmail.com",password)
+            server.login("xxxxxxxxxxxxxxxxxxxxx",password)
             server.sendmail(sender_email, row[-2], msgsubject+msgbody)
         # send SMS
         msgsender = 'TimMisiGPO'
