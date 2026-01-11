@@ -3,6 +3,8 @@ How to run this?
 1. [Manual] Download list of committers
 2. Put the file in .csv format in ./data directory
 3. Navigate to project root directory
+3a. Check whether there are any empty cells in file:  python .\detect_empty_cells_noheader.py .\data\2026list-transformed-20260111-batch1.csv
+3b. Check whether email and phone numbers format are correct: python .\check_email_phone_format.py data\2026list-transformed-20260111-batch5.csv
 4. To send SMS, run this command: timmisigpo.py -remindCommitmentSMS -filePath data/<committers-list>.csv
 5. To send Email, run this command: timmisigpo.py -remindCommitmentEmail -filePath data/<committers-list>.csv
 6. To send WA, run this command: timmisigpo.py -remindCommitmentWA -filePath data/<committers-list>.csv

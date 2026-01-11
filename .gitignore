@@ -6,3 +6,7 @@ credentials.py
 .env
 
 log/
+
+.idea
+
+__pycache__
