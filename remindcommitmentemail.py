@@ -21,8 +21,14 @@ def perform_reminder_email(file_path):
             print('row[-2] is {}'.format(row[-2]))
             with smtplib.SMTP_SSL("smtp.gmail.com", 465, context=context) as server:
                 server.login("timmisi.gpo@gmail.com", credentials.gmail_password)
-                server.sendmail("timmisigpo@gmail.com", row[-2], 'From: (Do Not Reply) Tim Misi - ORPC Indonesian Ministry\n'+msgsubject+msgbody)
-
+                server.sendmail(
+                    "timmisigpo@gmail.com",
+                    row[-2],
+                    'From: Tim Misi - ORPC Indonesian Ministry <timmisi.gpo@gmail.com>\n'
+                    'Reply-To: Tim Misi - ORPC Indonesian Ministry <gpo.misi@gmail.com>, Rofans Manao <rofans.manao@gmail.com>\n'
+                    + msgsubject
+                    + msgbody
+                )
 
 if __name__ == '__main__':
     perform_reminder_email(sys.argv[1])
