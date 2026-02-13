@@ -6,7 +6,7 @@ import ssl
 import re
 from datetime import datetime
 
-import templates
+import template_klarifikasi
 import credentials
 from dotenv import load_dotenv
 
@@ -14,9 +14,6 @@ load_dotenv()
 
 
 def is_valid_email(email):
-    """
-    Basic email format validation.
-    """
     if not email:
         return False
     email = email.strip()
@@ -24,8 +21,8 @@ def is_valid_email(email):
     return re.fullmatch(pattern, email) is not None
 
 
-def perform_reminder_email(file_path, send_message=False):
-    print('inside remind commitment email')
+def perform_klarifikasi_email(file_path, send_message=False):
+    print('inside klarifikasi email')
     print(f'file path is: {file_path}')
     print(f'send_message = {send_message}')
 
@@ -42,46 +39,29 @@ def perform_reminder_email(file_path, send_message=False):
     context = ssl.create_default_context()
 
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    log_filename = f"log/email_preview_{timestamp}.log"
+    log_filename = f"log/email_klarifikasi_{timestamp}.log"
 
     with open(log_filename, "w", encoding="utf-8") as logfile:
         with open(file_path, 'r', encoding="utf-8") as csvfile:
             datareader = csv.reader(csvfile, delimiter=',')
 
             for idx, row in enumerate(datareader, start=1):
-
-                # Ensure row has enough columns
-                if len(row) < 8:
+                # Ensure enough columns (need at least 9 cols: 0..8)
+                if len(row) < 9:
                     print(f"Row {idx} skipped: not enough columns")
                     continue
 
-                recipient = row[7].strip()  # Column 8
+                recipient = row[7].strip()  # column 8 = email
 
-                # Validate email format
                 if not is_valid_email(recipient):
                     print(f"Row {idx} skipped: invalid email '{recipient}'")
                     continue
 
-                #msgbody = templates.commitment_reminder.format(
-                #    row[0], row[2], row[3], row[5], row[4], row[6], row[6], row[0], row[6]
-                #)
+                # Personalised fields: 2nd (row[1]), 7th (row[6]), 1st (row[0])
+                msgsubject = template_klarifikasi.commitment_klarifikasi_template.format(row[1], row[6])
+                msgbody = template_klarifikasi.commitment_klarifikasi.format(row[0])
 
-                msgbody = templates.commitment_reminder.format(
-                    row[0],  # name
-                    row[2],  # payment type
-                    row[3],  # amount
-                    row[5],  # doa
-                    row[4],  # daya
-                    row[6],  # code (for "Nomor amplop...")
-                    row[6],  # example 1: "Janji Iman, {code}"
-                    row[6],  # example 2: "Mission Indo {code}"
-                )
-
-                msgsubject = templates.commitment_reminder_template.format(row[1], row[6])
-
-                print(f'row[1] is {row[1]}')
-                print(f'recipient is {recipient}')
-
+                # Ensure Subject header exists exactly once
                 if not msgsubject.lower().lstrip().startswith("subject:"):
                     msgsubject = "Subject: " + msgsubject.strip() + "\n\n"
 
@@ -93,6 +73,7 @@ def perform_reminder_email(file_path, send_message=False):
                     f"{msgbody}"
                 )
 
+                # Log final formatted email
                 logfile.write(f"===== EMAIL #{idx} =====\n")
                 logfile.write(raw_email)
                 logfile.write("\n" + ("-" * 60) + "\n\n")
@@ -111,4 +92,4 @@ def perform_reminder_email(file_path, send_message=False):
 if __name__ == '__main__':
     file_path = sys.argv[1]
     send_flag = "-sendmessage" in sys.argv
-    perform_reminder_email(file_path, send_message=send_flag)
+    perform_klarifikasi_email(file_path, send_message=send_flag)
